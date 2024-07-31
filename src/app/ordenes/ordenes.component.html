@@ -1,0 +1,26 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Formulario de Pedido de Mesa</h2>
+    <form #miFormulario="ngForm" (ngSubmit)="onSubmit(miFormulario)">
+      <div class="form-group">
+        <label for="numeroMesa">Número de Mesa</label>
+        <input type="number" class="form-control" id="numeroMesa" name="numeroMesa" placeholder="Ingrese el número de mesa" required ngModel>
+      </div>
+  
+      <div id="productos">
+        <div *ngFor="let producto of productos; let i = index" class="producto-group">
+          <div class="form-group">
+            <label for="producto{{i}}">Producto</label>
+            <input type="number" class="form-control" id="producto{{i}}" name="producto{{i}}" [(ngModel)]="producto.productoId" required>
+          </div>
+          <div class="form-group">
+            <label for="cantidad{{i}}">Cantidad</label>
+            <input type="number" class="form-control" id="cantidad{{i}}" name="cantidad{{i}}" [(ngModel)]="producto.cantidad" required>
+          </div>
+          <button type="button" class="btn btn-danger" (click)="removeProducto(i)">Eliminar</button>
+        </div>
+      </div>
+  
+      <button type="button" class="btn btn-secondary" (click)="addProducto()">Añadir Producto</button>
+      <button type="submit" class="btn btn-primary">Enviar Pedido</button>
+    </form>
+  </div>
