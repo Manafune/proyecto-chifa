@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { OrdenesComponent } from './ordenes/ordenes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListaOrdenesComponent } from './lista-ordenes/lista-ordenes.component';
+import { ProductoAddComponent } from './producto-add/producto-add.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrdenesComponent,
-    ListaOrdenesComponent
+    ListaOrdenesComponent,
+    ProductoAddComponent
   ],
   imports: [
     BrowserModule,
