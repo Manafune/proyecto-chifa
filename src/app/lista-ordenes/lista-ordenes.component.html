@@ -1,22 +1,22 @@
 <div class="container mt-5">
-    <h1>Ordenes</h1>
-    <div class="overflow-x-auto">
-      <table class="min-w-full border-collapse">
-        <thead class="bg-blue-600">
+    <h1 class="fw-bold">ORDENES</h1>
+    <div class="overflow-x-auto table-responsive">
+      <table class="min-w-full border-collapse table">
+        <thead class="bg-blue-600 table-dark">
           <tr>
-            <th class="p-3 text-center">Nro de Mesa</th>
-            <th class="p-3 text-center">Fecha</th>
-            <th class="p-3 text-center">Acción</th>
+            <th class="p-3 text-center">NRO DE MESA</th>
+            <th class="p-3 text-center">FECHA</th>
+            <th class="p-3 text-center">ACCIÓN</th>
           </tr>
         </thead>
         
-        <tbody>
+        <tbody class="text-center">
           @for (order of orders; track order.id) {
             <tr class="border-b">
               <td class="p-3">{{ order.mesaId }}</td>
               <td class="p-3">{{ order.fechaHora }}</td>
               <td class="p-3">
-                <button (click)="toggleDetails(order.id)" class="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-700">
+                <button (click)="toggleDetails(order.id)" class="btn btn-secondary ">
                   {{ expandedOrderId === order.id ? 'Ocultar detalles' : 'Mostrar detalles' }}
                 </button>
               </td>
@@ -24,24 +24,26 @@
             @if (expandedOrderId === order.id) {
               <tr class="border-b">
                 <td colspan="3">
-                  <table class="min-w-full border-collapse mt-2">
-                    <thead>
-                      <tr>
-                        <th class="p-3 text-center">Producto ID</th>
-                        <th class="p-3 text-center">Nombre Producto</th>
-                        <th class="p-3 text-center">Cantidad</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @for (detail of order.detallesOrden; track detail.productoId) {
+                  <div class="d-flex justify-content-center align-items-center">
+                    <table class="min-w-full border-collapse mt-2">
+                      <thead>
                         <tr>
-                          <td class="p-3 text-center">{{ detail.productoId }}</td>
-                          <td class="p-3 text-center">{{ detail.nombreProducto }}</td>
-                          <td class="p-3 text-center">{{ detail.cantidad }}</td>
+                          <th class="fw-bold p-3 text-center">PRODUCTO ID</th>
+                          <th class="fw-bold p-3 text-center">NOMBRE PRODUCTO</th>
+                          <th class="fw-bold p-3 text-center">CANTIDAD</th>
                         </tr>
-                      }
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        @for (detail of order.detallesOrden; track detail.productoId) {
+                          <tr>
+                            <td class="p-3 text-center">{{ detail.productoId }}</td>
+                            <td class="p-3 text-center">{{ detail.nombreProducto }}</td>
+                            <td class="p-3 text-center">{{ detail.cantidad }}</td>
+                          </tr>
+                        }
+                      </tbody>
+                    </table>
+                  </div>
                 </td>
               </tr>
             }
