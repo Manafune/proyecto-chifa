@@ -1,22 +1,22 @@
 <div class="container mt-5">
-    <h1>Productos</h1>
-    <div class="overflow-x-auto">
-        <table class="min-w-full border-collapse">
-            <thead class="bg-blue-600">
+    <h1 class="fw-bold">PRODUCTOS</h1>
+    <div class="overflow-x-auto table-responsive">
+        <table class="min-w-full border-collapse table">
+            <thead class="bg-blue-600 table-dark">
                 <tr>
-                    <th class="p-3 text-center">Nombre</th>
-                    <th class="p-3 text-center">Descipcion</th>
-                    <th class="p-3 text-center">Acción</th>
+                    <th class="p-3 text-center">NOMBRE</th>
+                    <th class="p-3 text-center">DESCRIPCION</th>
+                    <th class="p-3 text-center">ACCIÓN</th>
                 </tr>
             </thead>
             
-            <tbody>
+            <tbody class="text-center">
                 @for(product of products; track product.id){
                 <tr class="border-b">
                     <td class="p-3">{{ product.nombre }}</td>
                     <td class="p-3">{{ product.descripcion}}</td>
                     <td class="p-3">
-                        <button class="bg-red-500 text-white rounded-lg px-4 py-2 hover:bg-red-700">Salir</button>
+                        <button class="btn btn-danger bg-red-500 text-white rounded-lg px-4 py-2 hover:bg-red-700">Salir</button>
                     </td>
                 </tr>}
             </tbody>
