@@ -7,13 +7,15 @@ import { OrdenesComponent } from './ordenes/ordenes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListaOrdenesComponent } from './lista-ordenes/lista-ordenes.component';
 import { ProductoAddComponent } from './producto-add/producto-add.component';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrdenesComponent,
     ListaOrdenesComponent,
-    ProductoAddComponent
+    ProductoAddComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
