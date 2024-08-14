@@ -28,4 +28,27 @@ export class ProductoService {
   getProducts(): Producto[] {
     return this.products();
   }
+
+  async registrar(registro: Producto) {
+    try {
+      
+      const response=  await  fetch(this.url,{
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'  },
+          body: JSON.stringify(registro),
+      })
+      if (!response.ok) {
+        // Handle the error response here
+        const errorDetail = await response.text(); // Get error details if any
+        throw new Error(`Error: ${response.status} - ${errorDetail}`);
+      }
+     const result:unknown=await response.json()
+     return result
+    } catch (error) {
+      console.log(error)
+      throw new Error("error en los datos")
+    }
+      
+   }
 }
+
