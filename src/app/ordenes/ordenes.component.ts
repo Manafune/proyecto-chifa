@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { DetalleOrdenRequest, OrdenRequest } from './orden-request.model';
 import { OrderService } from '../service/ordenes.service';
+import { Producto } from '../producto-add/producto.model';
+import { ProductoService } from '../service/producto.service';
 @Component({
   selector: 'app-ordenes',
   templateUrl: './ordenes.component.html',
@@ -11,9 +13,10 @@ import { OrderService } from '../service/ordenes.service';
 export class OrdenesComponent{
 
   form: FormGroup;
-  productos: DetalleOrdenRequest[] = [{ productoId: 0, cantidad: 0 }];
+  productos: Producto[] = [];
 
   private fb = inject(FormBuilder);
+  private productoService = inject(ProductoService);
   private orderService = inject(OrderService);
   
   constructor() {
@@ -25,9 +28,8 @@ export class OrdenesComponent{
     });
   }
 
-  ngOnInit(): void {
-    console.log("Hola");
-    
+  async ngOnInit(): Promise<void> {
+    this.productos = await this.productoService.obtenerProductos();
   }
 
   get productosArray() {

@@ -11,7 +11,9 @@
         <div class="row g-3 align-items-center">
           <div class="col-md-6">
             <label for="producto{{i}}" class="form-label">Producto</label>
-            <input formControlName="productoId" type="number" class="form-control" id="producto{{i}}" placeholder="ID del producto">
+            <select formControlName="productoId" class="form-select" id="producto{{i}}" required>
+              <option *ngFor="let prod of productos" [value]="prod.id">{{ prod.nombre }}</option>
+            </select>
           </div>
           <div class="col-md-4">
             <label for="cantidad{{i}}" class="form-label">Cantidad</label>
@@ -23,6 +25,7 @@
         </div>
       </div>
     </div>
+
 
     <div class="d-flex justify-content-between">
       <button type="button" class="btn btn-success" (click)="addProducto()">Añadir Producto</button>
