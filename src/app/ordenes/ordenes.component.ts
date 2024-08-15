@@ -86,6 +86,8 @@ export class OrdenesComponent{
   
   addProducto() {
     this.productosArray.push(this.createProducto());
+    const newIndex = this.productosArray.length - 1;
+    this.onProductoChange(newIndex);
   }
 
   removeProducto(index: number) {
