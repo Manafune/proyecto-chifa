@@ -29,7 +29,46 @@ export class OrdenesComponent{
   }
 
   async ngOnInit(): Promise<void> {
-    this.productos = await this.productoService.obtenerProductos();
+    this.productos = await this.productoService.obtenerProductos();  // Asegúrate de que los productos tienen datos correctos
+    if (this.productos.length > 0) {
+      this.productosArray.controls.forEach((_, index) => {
+        this.onProductoChange(index);
+      });
+    }
+  }
+
+  onProductoChange(index: number) {
+    const productoControl = this.productosArray.at(index);
+    console.log('Lista de productos:', this.productos);
+    // Escuchar cambios en el select de productoId
+    productoControl.get('productoId')?.valueChanges.subscribe((productoId: any) => {
+      const id = Number(productoId); // Asegúrate de que el ID sea del tipo correcto
+      console.log('Producto ID desde el formulario:', id);
+    
+      const selectedProducto = this.productos.find(p => p.id === id);
+      console.log('Producto seleccionado:', selectedProducto);
+    
+      if (selectedProducto) {
+        const precio = selectedProducto.precio;
+        productoControl.patchValue({ precio: precio, subtotal: 0 }, { emitEvent: false });
+        this.updateSubtotal(index);
+      } else {
+        console.error('Producto no encontrado con ID:', id);
+        productoControl.patchValue({ precio: 0, subtotal: 0 }, { emitEvent: false });
+      }
+    });
+  
+    productoControl.get('cantidad')?.valueChanges.subscribe(() => {
+      this.updateSubtotal(index);
+    });
+  }
+  
+  updateSubtotal(index: number) {
+    const productoControl = this.productosArray.at(index);
+    const cantidad = productoControl.get('cantidad')?.value || 0;
+    const precio = productoControl.get('precio')?.value || 0;
+    const subtotal = cantidad * precio;
+    productoControl.patchValue({ subtotal: subtotal }, { emitEvent: false });
   }
 
   get productosArray() {
@@ -39,7 +78,9 @@ export class OrdenesComponent{
   createProducto(): FormGroup {
     return this.fb.group({
       productoId: [0, Validators.required],
-      cantidad: [0, Validators.required]
+      cantidad: [0, Validators.required],
+      precio: [{ value: 0, disabled: true }], 
+      subtotal: [{ value: 0, disabled: true }]
     });
   }
   

@@ -9,23 +9,30 @@
     <div formArrayName="productos">
       <div *ngFor="let producto of productosArray.controls; let i = index" [formGroupName]="i" class="producto-group border rounded p-3 mb-3">
         <div class="row g-3 align-items-center">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label for="producto{{i}}" class="form-label">Producto</label>
             <select formControlName="productoId" class="form-select" id="producto{{i}}" required>
               <option *ngFor="let prod of productos" [value]="prod.id">{{ prod.nombre }}</option>
             </select>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-2">
             <label for="cantidad{{i}}" class="form-label">Cantidad</label>
             <input formControlName="cantidad" type="number" class="form-control" id="cantidad{{i}}" placeholder="Cantidad">
           </div>
+          <div class="col-md-2">
+            <label class="form-label">Precio</label>
+            <input formControlName="precio" type="text" class="form-control">
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">Subtotal</label>
+            <input formControlName="subtotal" type="text" class="form-control">
+          </div>
           <div class="col-md-2 d-flex align-items-end">
-            <button type="button" class="btn btn-danger w-50 p-2 mt-4" (click)="removeProducto(i)">Eliminar</button>
+            <button type="button" class="btn btn-danger w-100 p-2 mt-4" (click)="removeProducto(i)">Eliminar</button>
           </div>
         </div>
       </div>
     </div>
-
 
     <div class="d-flex justify-content-between">
       <button type="button" class="btn btn-success" (click)="addProducto()">Añadir Producto</button>

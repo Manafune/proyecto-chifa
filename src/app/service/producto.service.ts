@@ -17,7 +17,6 @@ export class ProductoService {
       
       const data: Producto[] = await response.json();
       this.products.set(data)
-      console.log(this.products())
       return data;
     } catch (error) {
       console.error('There has been a problem with your fetch operation:', error);
