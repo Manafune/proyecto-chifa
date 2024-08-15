@@ -78,7 +78,7 @@ export class OrdenesComponent{
   createProducto(): FormGroup {
     return this.fb.group({
       productoId: [0, Validators.required],
-      cantidad: [0, Validators.required],
+      cantidad: [1, [Validators.required, Validators.min(1)]],
       precio: [{ value: 0, disabled: true }], 
       subtotal: [{ value: 0, disabled: true }]
     });

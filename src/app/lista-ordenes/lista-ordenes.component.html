@@ -6,6 +6,7 @@
           <tr>
             <th class="p-3 text-center">NRO DE MESA</th>
             <th class="p-3 text-center">FECHA</th>
+            <th class="p-3 text-center">DETALLES</th>
             <th class="p-3 text-center">ACCIÓN</th>
           </tr>
         </thead>
@@ -18,6 +19,11 @@
               <td class="p-3">
                 <button (click)="toggleDetails(order.id)" class="btn btn-secondary ">
                   {{ expandedOrderId === order.id ? 'Ocultar detalles' : 'Mostrar detalles' }}
+                </button>
+              </td>
+              <td class="p-3">
+                <button (click)="servirOrden(order.id)" class="btn btn-primary" [disabled]="order.estado !== 'PENDIENTE'">
+                  Servir
                 </button>
               </td>
             </tr>
@@ -50,6 +56,10 @@
           }
         </tbody>
       </table>
+    </div>
+    <div class="mt-4 d-flex justify-content-center">
+      <button (click)="prevPage()" [disabled]="page === 0" class="m btn btn-primary">Anterior</button>
+      <button (click)="nextPage()" [disabled]="(page + 1) * size >= totalElements" class="btn btn-primary mx-2">Siguiente</button>
     </div>
   </div>
   

@@ -33,24 +33,40 @@ export class OrderService{
         
      }
 
-     async listarOrden(): Promise<Orden[]>{
+     async listarOrden(pagina: number = 0, tamanoPagina: number = 10): Promise<{ content: Orden[], totalElements: number }>{
       try{
-        const response = await fetch(this.url);
+        const response = await fetch(`${this.url}?page=${pagina}&size=${tamanoPagina}`);
         if (!response.ok)  throw new Error('Network response was not ok');
       
-        const data: Orden[] = await response.json();
-        this.orders.set(data)
-        console.log(this.orders())
+        const data = await response.json();
+        this.orders.set(data.content);
+        console.log(this.orders());
         return data;
       }
       catch(error){
         console.error('There has been a problem with your fetch operation:', error);
-        return [];
+        return { content: [], totalElements: 0 }
       }
      }
 
      getOrders(): Orden[]{
       return this.orders();
      }
+
+     async servirOrden(id: number): Promise<void> {
+      try {
+        const response = await fetch(`${this.url}/${id}`, {
+          method: 'DELETE',
+        });
+        if (!response.ok) {
+          const errorDetail = await response.text();
+          throw new Error(`Error: ${response.status} - ${errorDetail}`);
+        }
+        // Optionally refresh the list of orders
+        await this.listarOrden();
+      } catch (error) {
+        console.error('Error al servir la orden:', error);
+      }
+    }
 
 }

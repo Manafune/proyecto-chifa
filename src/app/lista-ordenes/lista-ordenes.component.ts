@@ -9,13 +9,21 @@ import { OrderService } from '../service/ordenes.service';
 export class ListaOrdenesComponent {
   orders: Orden[] = [];
   expandedOrderId: number | null = null;
+  page = 0;
+  size = 10;
+  totalElements = 0;
 
   constructor(private ordenService: OrderService){}
 
   async ngOnInit(): Promise<void> {
-    this.orders = await this.ordenService.listarOrden();
+    await this.loadOrders();
   }
 
+  async loadOrders() {
+    const result = await this.ordenService.listarOrden(this.page, this.size);
+    this.orders = result.content;
+    this.totalElements = result.totalElements;
+  }
   toggleDetails(orderId: number) {
     if (this.expandedOrderId === orderId) {
       this.expandedOrderId = null;
@@ -23,11 +31,36 @@ export class ListaOrdenesComponent {
       this.expandedOrderId = orderId;
     }
   }
+
+  async servirOrden(id: number) {
+    try {
+      await this.ordenService.servirOrden(id);
+      // Opcionalmente, vuelve a cargar la lista de órdenes para reflejar el cambio
+      await this.loadOrders();
+    } catch (error) {
+      console.error('Error al servir la orden:', error);
+    }
+  }
+  
   trackByOrderId(index: number, order: Orden): number {
     return order.id;
   }
 
   trackByDetailId(index: number, detail: DetalleOrden): number {
     return detail.productoId;
+  }
+
+  nextPage() {
+    if ((this.page + 1) * this.size < this.totalElements) {
+      this.page++;
+      this.loadOrders();
+    }
+  }
+
+  prevPage() {
+    if (this.page > 0) {
+      this.page--;
+      this.loadOrders();
+    }
   }
 }
