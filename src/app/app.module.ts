@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListaOrdenesComponent } from './lista-ordenes/lista-ordenes.component';
 import { ProductoAddComponent } from './producto-add/producto-add.component';
 import { NavComponent } from './nav/nav.component';
+import { ProductoCreateComponent } from './producto-create/producto-create.component';
+import { ProductoEditComponent } from './producto-edit/producto-edit.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { NavComponent } from './nav/nav.component';
     OrdenesComponent,
     ListaOrdenesComponent,
     ProductoAddComponent,
-    NavComponent
+    NavComponent,
+    ProductoCreateComponent,
+    ProductoEditComponent
   ],
   imports: [
     BrowserModule,
