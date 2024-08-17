@@ -49,5 +49,25 @@ export class ProductoService {
     }
       
    }
+  async editar(id: number, producto: Producto) {
+    try{
+      const response = await fetch(`${this.url}/${id}`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(producto)
+      });
+      if (!response.ok) {
+        // Handle the error response here
+        const errorDetail = await response.text(); // Get error details if any
+        throw new Error(`Error: ${response.status} - ${errorDetail}`);
+      }
+      const result: unknown = await response.json();
+      return result;
+    } catch (error) {
+      console.log(error);
+      throw new Error('Error en los datos');
+    }
+  }
+  
 }
 
