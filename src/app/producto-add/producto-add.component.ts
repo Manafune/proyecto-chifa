@@ -30,9 +30,21 @@ export class ProductoAddComponent {
     }
   }
 
+  async toggleDisponibilidad(product: Producto): Promise<void> {
+    const nuevoEstado = !product.disponible;
+    console.log(!product.disponible);
+    await this.productoService.cambiarDisponibilidad(product.id);
+    product.disponible = nuevoEstado;
+    await this.loadProducts(); // Actualiza la lista de productos después de cambiar la disponibilidad
+  }
+
   paginaAnterior(): void {
     if (this.paginaActual > 0) {
       this.loadProducts(this.paginaActual - 1);
     }
+  }
+
+  trackById(index: number, item: Producto): number {
+    return item.id;
   }
 }

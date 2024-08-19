@@ -98,5 +98,21 @@ export class ProductoService {
       throw error;
     }
   }
+
+  async cambiarDisponibilidad(id: number) {
+    try {
+      const response = await fetch(`${this.url}/${id}`, {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json'},
+      });
+      if (!response.ok) {
+        const errorDetail = await response.text();
+        throw new Error(`Error: ${response.status} - ${errorDetail}`);
+      }
+    } catch (error) {
+      console.error('Error al cambiar disponibilidad:', error);
+      throw error;
+    }
+  }
 }
 

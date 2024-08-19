@@ -10,7 +10,8 @@
                     <th class="p-3 text-center">NOMBRE</th>
                     <th class="p-3 text-center">DESCRIPCION</th>
                     <th class="p-3 text-center">PRECIO</th>
-                    <th class="p-3 text-center">ACCIÓN</th>
+                    <th class="p-3 text-center">ESTADO</th>
+                    <th class="p-3 text-center">ACCIÓNES</th>
                 </tr>
             </thead>
             
@@ -20,9 +21,16 @@
                     <td class="p-3">{{ product.nombre }}</td>
                     <td class="p-3">{{ product.descripcion}}</td>
                     <td class="p-3">S/ {{product.precio}}</td>
+                    <td class="p-3">{{ product.disponible ? 'Activo' : 'Inactivo' }}</td>
                     <td class="p-3">
-                        <button class="btn btn-danger bg-red-500 text-white rounded-lg px-4 py-2 hover:bg-red-700 me-2">Salir</button>
-                        <button class="btn btn-warning bg-red-500 text-white rounded-lg px-4 py-2 hover:bg-red-700" [routerLink]="['/producto-edit', product.id]">Editar</button>
+                        <button 
+                            class="btn" 
+                            [ngClass]="product.disponible ? 'btn-danger bg-red-500' : 'btn-success bg-green-500'"
+                            (click)="toggleDisponibilidad(product)"
+                        >
+                            {{ product.disponible ? 'Desactivar' : 'Activar' }}
+                        </button>
+                        <button class="btn btn-warning bg-red-500 text-white rounded-lg px-4 py-2 hover:bg-red-700 ms-2" [routerLink]="['/producto-edit', product.id]">Editar</button>
                     </td>
                 </tr>}
             </tbody>
