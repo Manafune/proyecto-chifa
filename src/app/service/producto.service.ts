@@ -10,9 +10,9 @@ export class ProductoService {
 
   constructor() {}
 
-  async obtenerProductos(): Promise<Producto[]> {
+  async obtenerProductosDisponibles(): Promise<Producto[]> {
     try {
-      const response = await fetch(this.url);
+      const response = await fetch(`${this.url}/listardisponible`);
       if (!response.ok)  throw new Error('Network response was not ok');
       
       const data: Producto[] = await response.json();
@@ -21,6 +21,23 @@ export class ProductoService {
     } catch (error) {
       console.error('There has been a problem with your fetch operation:', error);
       return [];
+    }
+  }
+
+  async obtenerProductos(pagina: number = 0, tamaño: number = 10): Promise<{ products: Producto[], totalPages: number }> {
+    try {
+      const response = await fetch(`${this.url}?page=${pagina}&size=${tamaño}`);
+      if (!response.ok) throw new Error('Network response was not ok');
+
+      const data = await response.json();
+      this.products.set(data.content); // Assuming `data.content` contains the product list
+      return {
+        products: data.content,
+        totalPages: data.totalPages // Assuming `data.totalPages` contains total pages
+      };
+    } catch (error) {
+      console.error('There has been a problem with your fetch operation:', error);
+      return { products: [], totalPages: 0 };
     }
   }
 
@@ -65,9 +82,21 @@ export class ProductoService {
       return result;
     } catch (error) {
       console.log(error);
-      throw new Error('Error en los datos');
+      throw new Error('Error al editar producto');
     }
   }
   
+  async obtenerProductoPorId(id: number): Promise<Producto> {
+    try {
+      const response = await fetch(`${this.url}/${id}`);
+      if (!response.ok) throw new Error('Network response was not ok');
+      
+      const producto: Producto = await response.json();
+      return producto;
+    } catch (error) {
+      console.error('Error al obtener el producto:', error);
+      throw error;
+    }
+  }
 }
 

@@ -6,6 +6,12 @@
             <h3 class="fw-bold">EDITAR PRODUCTO</h3>
           </div>
           <div class="card-body">
+            <div *ngIf="loading" class="text-center">
+              <p>Cargando...</p>
+            </div>
+            <div *ngIf="error" class="alert alert-danger">
+              {{ error }}
+            </div>
             <form (ngSubmit)="onSubmit()">
               <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre:</label>

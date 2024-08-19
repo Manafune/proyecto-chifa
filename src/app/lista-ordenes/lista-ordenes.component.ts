@@ -12,6 +12,7 @@ export class ListaOrdenesComponent {
   page = 0;
   size = 10;
   totalElements = 0;
+  totalPages = 0;
 
   constructor(private ordenService: OrderService){}
 
@@ -23,6 +24,7 @@ export class ListaOrdenesComponent {
     const result = await this.ordenService.listarOrden(this.page, this.size);
     this.orders = result.content;
     this.totalElements = result.totalElements;
+    this.totalPages = Math.ceil(this.totalElements / this.size);
   }
   toggleDetails(orderId: number) {
     if (this.expandedOrderId === orderId) {
@@ -51,7 +53,7 @@ export class ListaOrdenesComponent {
   }
 
   nextPage() {
-    if ((this.page + 1) * this.size < this.totalElements) {
+    if ((this.page + 1) * this.totalPages) {
       this.page++;
       this.loadOrders();
     }

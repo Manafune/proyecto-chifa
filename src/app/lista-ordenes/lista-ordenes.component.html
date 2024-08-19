@@ -57,9 +57,10 @@
         </tbody>
       </table>
     </div>
-    <div class="mt-4 d-flex justify-content-center">
+    <div class="mt-4 d-flex justify-content-center align-items-center">
       <button (click)="prevPage()" [disabled]="page === 0" class="m btn btn-primary">Anterior</button>
-      <button (click)="nextPage()" [disabled]="(page + 1) * size >= totalElements" class="btn btn-primary mx-2">Siguiente</button>
+      <span class="mx-2">Página {{ page + 1 }} de {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="(page + 1) >= totalPages" class="btn btn-primary mx-2">Siguiente</button>
     </div>
   </div>
   

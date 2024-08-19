@@ -17,6 +17,9 @@ export class ProductoEditComponent implements OnInit {
     disponible: true
   };
 
+  loading: boolean = true;
+  error: string | null = null;
+
   constructor(
     private route: ActivatedRoute,
     private productoService: ProductoService,
@@ -25,24 +28,27 @@ export class ProductoEditComponent implements OnInit {
 
   async ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    try {
-      const productos = await this.productoService.obtenerProductos();
-      const productoEncontrado = productos.find((p: Producto) => p.id === id);
-      if (productoEncontrado) {
-        this.producto = productoEncontrado;
+    if (id) {
+      try {
+        this.producto = await this.productoService.obtenerProductoPorId(id);
+        this.loading = false;
+      } catch (error) {
+        this.error = 'Error al obtener el producto';
+        this.loading = false;
       }
-    } catch (error) {
-      console.error('Error al obtener el producto:', error);
+    } else {
+      this.error = 'ID del producto no válido';
+      this.loading = false;
     }
   }
 
   async onSubmit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = this.producto.id;
     try {
       await this.productoService.editar(id, this.producto);
-      this.router.navigate(['/producto-add']);
+      this.router.navigate(['/producto-add']); // Redirige a la lista de productos o a otra página
     } catch (error) {
-      console.error('Error al editar el producto:', error);
+      this.error = 'Error al guardar los cambios';
     }
   }
 

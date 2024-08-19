@@ -29,7 +29,7 @@ export class OrdenesComponent{
   }
 
   async ngOnInit(): Promise<void> {
-    this.productos = await this.productoService.obtenerProductos();  // Asegúrate de que los productos tienen datos correctos
+    this.productos = await this.productoService.obtenerProductosDisponibles();  // Asegúrate de que los productos tienen datos correctos
     if (this.productos.length > 0) {
       this.productosArray.controls.forEach((_, index) => {
         this.onProductoChange(index);
