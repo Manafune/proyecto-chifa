@@ -10,6 +10,7 @@ import { ProductoAddComponent } from './producto-add/producto-add.component';
 import { NavComponent } from './nav/nav.component';
 import { ProductoCreateComponent } from './producto-create/producto-create.component';
 import { ProductoEditComponent } from './producto-edit/producto-edit.component';
+import { FacturaListComponent } from './factura-list/factura-list.component';
 
 @NgModule({
   declarations: [
@@ -19,14 +20,15 @@ import { ProductoEditComponent } from './producto-edit/producto-edit.component';
     ProductoAddComponent,
     NavComponent,
     ProductoCreateComponent,
-    ProductoEditComponent
+    ProductoEditComponent,
+    FacturaListComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule
-    
+
   ],
   providers: [
     provideClientHydration()
