@@ -5,7 +5,7 @@ import { FacturaResponse } from "../factura-list/factura-list.model";
     providedIn: 'root'
 })
 export class FacturaService {
-    private url = 'http://localhost:8080/api/facturas';
+    private url = 'http://localhost:8081/api/facturas';
   
     constructor() {}
   

@@ -6,7 +6,7 @@ import { Orden } from "../lista-ordenes/orden.model";
     providedIn: 'root'
 })
 export class OrderService{
-    private url = 'http://localhost:8080/api/ordenes'
+    private url = 'http://localhost:8081/api/ordenes'
     private orders = signal< Orden[]>([]);
     constructor(){
 
