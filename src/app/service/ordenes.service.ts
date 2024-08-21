@@ -1,12 +1,12 @@
 import { Injectable, signal } from "@angular/core";
 import { OrdenRequest } from "../ordenes/orden-request.model";
 import { Orden } from "../lista-ordenes/orden.model";
-
+import { environment } from "../../environments/environment";
 @Injectable({
     providedIn: 'root'
 })
 export class OrderService{
-    private url = 'http://localhost:8080/api/ordenes'
+    private url = `${environment.API_URL}/api/ordenes`
     private orders = signal< Orden[]>([]);
     constructor(){
 
