@@ -10,7 +10,7 @@ import { CierreCajaService } from '../service/cierre-caja.service';
 export class GananciasListComponent {
   cierresCaja: CierreCajaResponse[] = [];
   currentPage: number = 1;
-  totalPages: number = 0;
+  totalPages: number = 1;
   constructor(private cierreCajaService: CierreCajaService) { }
 
   ngOnInit(): void {
@@ -20,18 +20,26 @@ export class GananciasListComponent {
   async obtenerCierresDeCaja(page: number): Promise<void> {
     try {
       const response = await this.cierreCajaService.obtenerCierres(page);
-      this.cierresCaja = response.content; // Asume que el backend devuelve un objeto con una propiedad 'content' para los elementos actuales.
-      this.totalPages = response.totalPages; // Asume que el backend devuelve el total de páginas.
+      this.cierresCaja = response.content; 
+      this.totalPages = response.totalPages > 0 ? response.totalPages : 1;
       this.currentPage = page;
     } catch (error) {
       console.error('Error al obtener los cierres de caja:', error);
     }
   }
-  
+
   cambiarPagina(incremento: number): void {
     const nuevaPagina = this.currentPage + incremento;
     if (nuevaPagina > 0 && nuevaPagina <= this.totalPages) {
       this.obtenerCierresDeCaja(nuevaPagina);
     }
+  }
+
+  isFirstPage(): boolean {
+    return this.currentPage === 1;
+  }
+
+  isLastPage(): boolean {
+    return this.currentPage === this.totalPages;
   }
 }
