@@ -1,0 +1,31 @@
+<div class="container mt-5">
+    <h2 class="fw-bold">LISTA DE FACTURAS</h2>
+    <div class="overflow-x-auto table-responsive">
+        <table class="min-w-full border-collapse table">
+            <thead class="bg-blue-600 table-dark">
+              <tr>
+                <th class="p-3 text-center">SKU</th>
+                <th class="p-3 text-center">NÚMERO DE ORDEN</th>
+                <th class="p-3 text-center">FECHA</th>
+                <th class="p-3 text-center">TOTAL</th>
+                <th class="p-3 text-center">PAGO</th>
+                <th class="p-3 text-center">ACCIÓNES</th>
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              <tr *ngFor="let factura of facturas">
+                <td>{{ factura.id }}</td>
+                <td>{{ factura.ordenId }}</td>
+                <td>{{ factura.fecha }}</td>
+                <td>S/.{{ factura.total }}</td>
+                <td>{{ factura.pagada ? 'Cancelado' : 'Pendiente' }}</td>
+                <td>
+                  <button class="btn btn-success" (click)="marcarComoPagada(factura.id)" [disabled]="factura.pagada">
+                    Pagar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+  </div>
