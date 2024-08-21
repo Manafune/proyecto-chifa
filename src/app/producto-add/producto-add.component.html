@@ -16,6 +16,11 @@
             </thead>
             
             <tbody class="text-center">
+                @if(products.length === 0){
+                <tr>
+                    <td colspan="6">No productos disponibles</td>
+                </tr>
+                }
                 @for(product of products; track product.id){
                 <tr class="border-b">
                     <td class="p-3">{{ product.nombre }}</td>
@@ -23,6 +28,7 @@
                     <td class="p-3">S/ {{product.precio}}</td>
                     <td class="p-3">{{ product.disponible ? 'Activo' : 'Inactivo' }}</td>
                     <td class="p-3">
+                        <div class="mb-2">
                         <button 
                             class="btn" 
                             [ngClass]="product.disponible ? 'btn-danger bg-red-500' : 'btn-success bg-green-500'"
@@ -30,7 +36,10 @@
                         >
                             {{ product.disponible ? 'Desactivar' : 'Activar' }}
                         </button>
+                        </div>
+                        <div class="mb-2">
                         <button class="btn btn-warning bg-red-500 text-white rounded-lg px-4 py-2 hover:bg-red-700 ms-2" [routerLink]="['/producto-edit', product.id]">Editar</button>
+                        </div>
                     </td>
                 </tr>}
             </tbody>

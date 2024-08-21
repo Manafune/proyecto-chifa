@@ -12,6 +12,11 @@
         </thead>
         
         <tbody class="text-center">
+          @if(orders.length === 0){
+            <tr>
+              <td colspan="6">No hay ordenes tomadas</td>
+            </tr>
+          }
           @for (order of orders; track order.id) {
             <tr class="border-b">
               <td class="p-3">{{ order.mesaId }}</td>
