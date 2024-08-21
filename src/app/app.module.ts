@@ -11,6 +11,7 @@ import { NavComponent } from './nav/nav.component';
 import { ProductoCreateComponent } from './producto-create/producto-create.component';
 import { ProductoEditComponent } from './producto-edit/producto-edit.component';
 import { FacturaListComponent } from './factura-list/factura-list.component';
+import { TableAddComponent } from './table-add/table-add.component';
 import { GananciasListComponent } from './ganancias-list/ganancias-list.component';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { GananciasListComponent } from './ganancias-list/ganancias-list.componen
     NavComponent,
     ProductoCreateComponent,
     ProductoEditComponent,
+    FacturaListComponent,
     FacturaListComponent,
     GananciasListComponent
   ],

@@ -1,12 +1,13 @@
 import { Injectable, signal } from "@angular/core";
 import { FacturaResponse } from "../factura-list/factura-list.model";
 import { Page } from "../factura-list/page.model";
+import { environment } from "../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class FacturaService {
-    private url = 'http://localhost:8080/api/facturas';
+    private url = `${environment.API_URL}/api/facturas`;
   
     constructor() {}
   
