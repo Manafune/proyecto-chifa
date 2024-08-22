@@ -1,0 +1,48 @@
+<div class="container mt-5">
+    <h2 class="fw-bold">LISTADO DE CIERRE DE CAJA</h2>
+    <div class="overflow-x-auto table-responsive">
+      <table class="min-w-full border-collapse table">
+        <thead class="bg-blue-600 table-dark">
+          <tr>
+            <th class="p-3 text-center">ID</th>
+            <th class="p-3 text-center">FECHA DE CIERRE</th>
+            <th class="p-3 text-center">VENTAS TOTALES</th>
+            <th class="p-3 text-center">EFECTIVO EN CAJA</th>
+            <th class="p-3 text-center">DIFERENCIA</th>
+            <th class="p-3 text-center">FECHA/HORA DE REGISTRO</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          <tr *ngIf="cierresCaja.length === 0">
+              <td colspan="6">No hay facturas disponibles</td>
+          </tr>
+          <tr *ngFor="let cierre of cierresCaja">
+            <td>{{ cierre.id }}</td>
+            <td>{{ cierre.fechaCierre }}</td>
+            <td>{{ cierre.ventasTotales }}</td>
+            <td>{{ cierre.efectivoEnCaja }}</td>
+            <td>{{ cierre.diferencia }}</td>
+            <td>{{ cierre.fechaHoraRegistro }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    
+        <div class="mt-4 d-flex justify-content-center align-items-center">
+          
+            
+              <button class="btn btn-primary" (click)="cambiarPagina(-1)" aria-label="Previous" [attr.aria-disabled]="isFirstPage()">
+                <span [class.disabled]="isFirstPage()" aria-hidden="true">&laquo; Anterior</span>
+              </button>
+            
+            
+              <span class="mx-2">Página {{ currentPage }} de {{ totalPages }}</span>
+            
+              <button class="btn btn-primary" (click)="cambiarPagina(1)" aria-label="Next" [attr.aria-disabled]="isLastPage()">
+                <span [class.disabled]="isLastPage()" aria-hidden="true">Siguiente &raquo;</span>
+              </button>
+        
+        </div>
+    
+  </div>

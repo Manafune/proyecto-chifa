@@ -1,5 +1,10 @@
 <div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 class="fw-bold">LISTA DE FACTURAS</h2>
+    <button class="btn btn-primary" (click)="handleCierreDeCaja()">
+      Realizar Cierre de Caja
+    </button>
+  </div>
     <div class="overflow-x-auto table-responsive">
         <table class="min-w-full border-collapse table">
             <thead class="bg-blue-600 table-dark">
@@ -13,6 +18,9 @@
               </tr>
             </thead>
             <tbody class="text-center">
+              <tr *ngIf="facturas.length === 0">
+                <td colspan="6">No hay facturas disponibles</td>
+              </tr>
               <tr *ngFor="let factura of facturas">
                 <td>{{ factura.id }}</td>
                 <td>{{ factura.ordenId }}</td>
@@ -28,4 +36,15 @@
             </tbody>
           </table>
     </div>
+    
+      <div class="mt-4 d-flex justify-content-center align-items-center">
+            <button class="btn btn-primary" (click)="cambiarPagina(-1)" aria-label="Previous">
+              <span [class.disabled]="currentPage === 1 || totalPages === 0" aria-hidden="true">&laquo; Anterior</span>
+            </button>
+            <span class="mx-2">Página {{ currentPage }} de {{ totalPages || 1 }}</span>
+            <button class="btn btn-primary" (click)="cambiarPagina(1)" aria-label="Next">
+              <span [class.disabled]="currentPage === totalPages || totalPages === 0" aria-hidden="true">Siguiente &raquo;</span>
+            </button>
+      </div>
+    
   </div>

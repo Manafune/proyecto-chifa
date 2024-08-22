@@ -13,6 +13,8 @@ import { ProductoEditComponent } from './producto-edit/producto-edit.component';
 import { FacturaListComponent } from './factura-list/factura-list.component';
 import { TableAddComponent } from './table-add/table-add.component';
 import { ListaTableComponent } from './lista-table/lista-table.component';
+import { GananciasListComponent } from './ganancias-list/ganancias-list.component';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { ListaTableComponent } from './lista-table/lista-table.component';
     ProductoEditComponent,
     FacturaListComponent,
     ListaTableComponent,
+    FacturaListComponent,
+    GananciasListComponent
   ],
   imports: [
     BrowserModule,
