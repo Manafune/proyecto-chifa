@@ -7,6 +7,7 @@ import { ProductoEditComponent } from './producto-edit/producto-edit.component';
 import { ListaOrdenesComponent } from './lista-ordenes/lista-ordenes.component';
 import { FacturaListComponent } from './factura-list/factura-list.component';
 import { TableAddComponent } from './table-add/table-add.component';
+import { ListaTableComponent } from './lista-table/lista-table.component';
 import { GananciasListComponent } from './ganancias-list/ganancias-list.component';
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'producto-edit/:id', component: ProductoEditComponent},
   { path: 'factura-list', component: FacturaListComponent },
   { path: "table-add", component: TableAddComponent },
+  { path: "lista-table", component: ListaTableComponent},
   { path: 'factura-list', component: FacturaListComponent},
   { path: 'ganancias-list', component: GananciasListComponent},
   { path: '', redirectTo: '/lista-ordenes', pathMatch: 'full' } // Ruta por defecto

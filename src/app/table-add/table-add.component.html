@@ -1,25 +1,23 @@
 <div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8 col-lg-6">
-      <div class="card">
-        <div class="card-header text-center">
-          <h2 class="fw-bold">Crear Mesa</h2>
+  <div class="row justify-content-center col-md-8 col-lg-6 card m-auto">
+    <div class="card-header text-center">
+      <h2 class="fw-bold">Crear Mesa</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="tableAddForm" (ngSubmit)="handleSubmit()">
+        <div class="mb-3">
+          <label for="numeroMesa" class="form-label">Número de Mesa</label>
+          <input type="number" id="numeroMesa" class="form-control" formControlName="numberTable"
+            placeholder="Ingrese el número de la mesa">
         </div>
-        <div class="card-body">
-          <form [formGroup]="tableAddForm" (ngSubmit)="handleSubmit()">
-            <div class="mb-3">
-              <label for="numeroMesa" class="form-label">Número de Mesa</label>
-              <input type="number" id="numeroMesa" class="form-control" formControlName="numberTable"
-                placeholder="Ingrese el número de la mesa">
-            </div>
-            <div class="d-flex flex-column flex-md-row gap-2">
-              <button type="submit" class="btn btn-primary w-100 w-md-30" [disabled]="!tableAddForm.valid">Crear
-                Mesa</button>
-              <button type="button" class="btn btn-secondary w-100 w-md-30">Regresar</button>
-            </div>
-          </form>
+        <div class="d-flex flex-column flex-md-row gap-2">
+          <button type="submit" class="btn btn-primary w-100 w-md-30" [disabled]="!tableAddForm.valid">Crear
+            Mesa</button>
+          <a [routerLink]="['/lista-table']" class="btn btn-secondary w-100 w-md-30">
+            Regresar
+          </a>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>
